@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusTrack | Student Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <a class="logo" href="#">
+        <span>c</span>
+        campus<span>track</span>
+      </a>
+      <p class="side-label">WORKSPACE</p>
+      <a class="nav active" href="#">▦ &nbsp; Overview</a>
+      <a class="nav" href="#students">♙ &nbsp; Students</a>
+      <div class="side-bottom">
+        <div class="profile">
+          <div class="avatar">AD</div>
+          <div>
+            <b>Admin User</b>
+            <small>Administrator</small>
+          </div>
+        </div>
+        <small class="version">CampusTrack · v1.0</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div>
+          <p class="crumb">DASHBOARD / OVERVIEW</p>
+          <h1>Good morning, Admin <span>✦</span></h1>
+          <p class="sub">Here’s what’s happening with your campus today.</p>
+        </div>
+        <button class="add-main" id="add-student">＋ Add student</button>
+      </header>
+
+      <section class="stats">
+        <article class="stat">
+          <div class="stat-icon purple">♙</div>
+          <p>Total students</p>
+          <strong id="total">—</strong>
+          <small>Registered students</small>
+        </article>
+        <article class="stat">
+          <div class="stat-icon green">▤</div>
+          <p>Courses</p>
+          <strong id="courses">—</strong>
+          <small>Active programmes</small>
+        </article>
+        <article class="stat">
+          <div class="stat-icon orange">↗</div>
+          <p>Average marks</p>
+          <strong id="average">—</strong>
+          <small>Across all students</small>
+        </article>
+        <article class="stat">
+          <div class="stat-icon red">!</div>
+          <p>Low attendance</p>
+          <strong id="low">—</strong>
+          <small>Below 75% attendance</small>
+        </article>
+      </section>
+
+      <section class="panel" id="students">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">STUDENT DIRECTORY</p>
+            <h2>All students</h2>
+          </div>
+          <span class="count" id="row-count">0 records</span>
+        </div>
+        <div class="tools">
+          <input
+            id="search"
+            placeholder="Search by name, email or course…"
+            aria-label="Search students"
+          />
+          <select id="course-filter">
+            <option value="">All courses</option>
+            <option>BCA</option>
+            <option>B.Com</option>
+            <option>BBA</option>
+            <option>B.Sc</option>
+          </select>
+          <button class="export" id="export">↓ Export CSV</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>STUDENT</th>
+                <th>COURSE</th>
+                <th>YEAR</th>
+                <th>ATTENDANCE</th>
+                <th>MARKS</th>
+                <th>STATUS</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody id="student-rows">
+              <tr>
+                <td colspan="7" class="empty">Loading students…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <footer>
+        CampusTrack Student Management
+        <span>Built with Spring Boot · MySQL / H2</span>
+      </footer>
+    </main>
+
+    <div class="modal-bg" id="modal-bg">
+      <div class="modal">
+        <div class="modal-head">
+          <div>
+            <p class="eyebrow">STUDENT RECORD</p>
+            <h2 id="modal-title">Add student</h2>
+          </div>
+          <button class="close" id="close-modal">×</button>
+        </div>
+        <form id="student-form">
+          <input type="hidden" name="id" />
+          <div class="form-grid">
+            <label>
+              Full name
+              <input
+                name="name"
+                required
+                minlength="2"
+                placeholder="Student name"
+              />
+            </label>
+            <label>
+              Email address
+              <input
+                name="email"
+                type="email"
+                required
+                placeholder="student@example.com"
+              />
+            </label>
+            <label>
+              Phone number
+              <input
+                name="phone"
+                required
+                pattern="[0-9+ -]{8,15}"
+                placeholder="Mobile number"
+              />
+            </label>
+            <label>
+              Course
+              <select name="course" required>
+                <option value="">Choose course</option>
+                <option>BCA</option>
+                <option>B.Com</option>
+                <option>BBA</option>
+                <option>B.Sc</option>
+                <option>BA</option>
+              </select>
+            </label>
+            <label>
+              Academic year
+              <select name="year" required>
+                <option value="">Choose year</option>
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+              </select>
+            </label>
+            <label>
+              Attendance (%)
+              <input
+                name="attendance"
+                type="number"
+                min="0"
+                max="100"
+                required
+                value="85"
+              />
+            </label>
+            <label>
+              Marks (%)
+              <input
+                name="marks"
+                type="number"
+                min="0"
+                max="100"
+                step="0.1"
+                required
+                value="75"
+              />
+            </label>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="cancel" id="cancel">Cancel</button>
+            <button class="save" type="submit" id="save-btn">
+              Save student
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>
