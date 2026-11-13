@@ -21,8 +21,7 @@ A Java Full Stack student administration dashboard built using HTML, CSS, JavaSc
 - IntelliJ IDEA (recommended)
 
 ## Run in IntelliJ
-1. Extract this ZIP.
-2. Open the `CampusTrack` folder as a Maven project.
+1. Open the `CampusTrack` folder as a Maven project.
 3. Wait for Maven dependencies to download.
 4. Run `CampusTrackApplication.java`.
 5. Visit **http://localhost:8080**.
